@@ -19,8 +19,8 @@
     "css:build": "tailwindcss -i ./src/style/base.css -o ./_site/output.css --minify",
     "lint": "eslint . --ext js,cjs,mjs,ts,tsx --report-unused-disable-directives --max-warnings 0 --debug --cache --cache-location ./node_modules/.cache/eslint",
     "lint:fix": "eslint . --ext js,cjs,mjs,ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
-    "prettier": "prettier --check \"./**/*.{js,cjs,mjs,ts,tsx,css,scss,md,json}\" --cache --debug-check",
-    "prettier:fix": "prettier --write \"./**/*.{js,cjs,mjs,ts,tsx,css,scss,md,json}\" --config ./.prettierrc.js --cache",
+    "prettier": "prettier --check \"./**/*.{js,cjs,mjs,ts,tsx,css,scss,md,json,njk}\" --cache --debug-check",
+    "prettier:fix": "prettier --write \"./**/*.{js,cjs,mjs,ts,tsx,css,scss,md,json,njk}\" --config ./prettier.config.js --cache",
     "format": "npm run prettier:fix && npm run lint:fix",
     "clean": "del-cli _site",
     "test": "echo \"Error: no test specified\" && exit 1"
