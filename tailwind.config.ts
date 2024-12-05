@@ -2,8 +2,8 @@ import type { Config } from 'tailwindcss';
 
 import * as fs from 'fs';
 import plugin from 'tailwindcss/plugin';
-import { BREAKPOINTS } from './app/config/BREAKPOINTS';
-import './app/utils/prototype';
+import { BREAKPOINTS } from './src/_data/BREAKPOINTS';
+import './utils/prototype';
 
 // =========================================================================
 
@@ -17,7 +17,7 @@ function toRGB(hex) {
   return [r, g, b].join(' ');
 }
 
-const variablesCSS = fs.readFileSync(__dirname + '/app/css/variables.css', { encoding: 'utf8', flag: 'r' });
+const variablesCSS = fs.readFileSync(__dirname + '/src/assets/css/variables.css', { encoding: 'utf8', flag: 'r' });
 const CSSLines = variablesCSS.split(/\r?\n/);
 
 const PROPERTY_MODIFIERS = {

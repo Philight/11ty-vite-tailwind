@@ -7,7 +7,7 @@ export default {
   trailingComma: 'all',
   arrowParens: 'avoid',
   printWidth: 160,
-  tabWidth: 12,
+  tabWidth: 2,
   semi: true,
   singleQuote: true,
   jsxSingleQuote: false,
@@ -20,8 +20,8 @@ export default {
   quoteProps: 'as-needed',
   plugins: [
     'prettier-plugin-tailwindcss',
-    'prettier-plugin-twig-nunjucks-melody'
-    // 'prettier-plugin-jinja-template',
+    'prettier-plugin-twig-nunjucks-melody',
+    'prettier-plugin-jinja-template',
     // '@trivago/prettier-plugin-sort-imports'
   ],
   // importOrderSeparation: true,
@@ -44,9 +44,9 @@ export default {
     {
       files: ['*.njk'],
       options: {
-        // parser: 'jinja-template',
-        // parser: 'twig-nunjucks-melody'
-      }
-    }
-  ]
-}
+        parser: 'jinja-template',
+        // parser: 'twig-nunjucks-melody',
+      },
+    },
+  ],
+};
