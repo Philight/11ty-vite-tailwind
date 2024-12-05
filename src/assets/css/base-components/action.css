@@ -1,0 +1,91 @@
+/** 
+ * ACTION
+ */
+
+@layer components {
+  /** 
+   * BUTTON
+   */
+  .button__c {
+    .button {
+      &,
+      label {
+        @apply btn;
+      }
+      label {
+        @apply shadow-none;
+      }
+      &.standard {
+        @apply btn--standard;
+      }
+      &.outline {
+        @apply btn--outline;
+      }
+      &.primary {
+        @apply btn--primary;
+      }
+      &.secondary {
+        @apply btn--secondary;
+      }
+      &.lg {
+        @apply btn--lg;
+      }
+      &.md {
+        @apply btn--md;
+      }
+      &.sm {
+        @apply btn--sm;
+      }
+    }
+  }
+
+  /** 
+   * NAVIGATION ARROW
+   */
+  .nav-arrow__c.icon__c {
+    @apply z-10 flex scale-y-[2] items-center;
+    @apply cursor-pointer;
+    @apply h-7 w-7;
+    @media screen(tab-sm) {
+      @apply h-9 w-9 p-1;
+    }
+
+    &.disabled {
+      @apply opacity-40;
+    }
+    &.left {
+      @apply left-0.5;
+    }
+    &.right {
+      @apply right-0.5;
+    }
+    &.bottom {
+      @apply absolute left-1/2 -translate-x-1/2 -translate-y-10 rotate-90;
+    }
+    &.flying {
+      @apply absolute top-1/2 -translate-y-1/2;
+      @apply scale-y-[2];
+    }
+    &.highlight {
+      @apply rounded-[50%];
+      .icon {
+        @apply translate-x-0.5;
+      }
+      &.left .icon {
+        @apply -translate-x-0.5;
+      }
+    }
+    &.primary {
+      background-color: #277881a1;
+    }
+    &.standard {
+      @apply border-white-primary bg-white-primary/10 border;
+      .icon {
+        @apply bg-white-primary;
+      }
+    }
+    .icon {
+      @apply h-5 w-5;
+    }
+  }
+}

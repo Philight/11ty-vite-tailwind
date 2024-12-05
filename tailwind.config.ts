@@ -2,6 +2,8 @@ import type { Config } from 'tailwindcss';
 
 import * as fs from 'fs';
 import plugin from 'tailwindcss/plugin';
+import daisyui from 'daisyui';
+
 import { BREAKPOINTS } from './src/_data/BREAKPOINTS';
 import './utils/prototype';
 import { getPathnames } from './utils/pathname';
@@ -9,6 +11,7 @@ import { getPathnames } from './utils/pathname';
 // =========================================================================
 
 const __dirname = getPathnames(import.meta.url).__dirname;
+const CSSVariablesPath = __dirname + '/src/assets/css/customisable/variables.css';
 
 /* Converts HEX color to RGB */
 function toRGB(hex) {
@@ -20,8 +23,8 @@ function toRGB(hex) {
   return [r, g, b].join(' ');
 }
 
-const variablesCSS = fs.readFileSync(__dirname + '/src/assets/css/variables.css', { encoding: 'utf8', flag: 'r' });
-const CSSLines = variablesCSS.split(/\r?\n/);
+const CSSVariables = fs.readFileSync(CSSVariablesPath, { encoding: 'utf8', flag: 'r' });
+const CSSRules = CSSVariables.split(/\r?\n/);
 
 const PROPERTY_MODIFIERS = {
   color: '--color-',
@@ -41,7 +44,7 @@ function readCSS() {
   for (const property of Object.keys(PROPERTY_MODIFIERS)) {
     const modifier = PROPERTY_MODIFIERS[property];
 
-    PROPERTY_SETTINGS[property] = CSSLines.filter(line => line.includes(modifier)).reduce((acc, line) => {
+    PROPERTY_SETTINGS[property] = CSSRules.filter(line => line.includes(modifier)).reduce((acc, line) => {
       const propertyRule = String(line.split(':')[0]).removeWhitespace();
       const propertyName = propertyRule.split(modifier)[1];
       return {
@@ -64,7 +67,18 @@ export default {
   corePlugins: {
     preflight: false,
   },
-  content: ['./app/**/*.{js,ts,jsx,tsx,vue,svelte}'],
+  // daisyUI config (optional - here are the default values)
+  daisyui: {
+    themes: ['light', 'dark', 'halloween'], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+    darkTheme: 'dark', // name of one of the included themes for dark mode
+    base: true, // applies background color and foreground color for root element by default
+    styled: true, // include daisyUI colors and design decisions for all components
+    utils: true, // adds responsive and modifier utility classes
+    prefix: '', // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
+    logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
+    themeRoot: ':root', // The element that receives theme color CSS variables
+  },
+  content: ['./src/**/*.{html,md,njk,ejs,js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -313,6 +327,8 @@ export default {
     },
   },
   plugins: [
+    // DaisyUI
+    daisyui,
     //    plugin(function ({ addBase }) {
     plugin(function ({ matchUtilities, theme }) {
       /*

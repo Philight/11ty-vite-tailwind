@@ -1,9 +1,5 @@
 ---
-permalink: style.css
+permalink: global.css
 ---
 
-{% set css %} 
-	{% include "src/assets/css/tailwind.css" %} 
-{% endset %} 
-
-{{css | postcss | safe}}
+{% set css %} {% include "./global.css" %} {% endset %} {{css | postcss | safe}}

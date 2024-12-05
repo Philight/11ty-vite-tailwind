@@ -8,10 +8,11 @@
     "not IE 11"
   ],
   "scripts": {
-    "start": "npx @11ty/eleventy --serve",
-    "start:tsx": "tsx node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --incremental",
+    "start": "npm run serve:js",
+    "start:ts": "npm run serve:ts",
     "watch": "npx @11ty/eleventy --watch",
-    "serve": "npx @11ty/eleventy --serve",
+    "serve:js": "npx @11ty/eleventy --serve",
+    "serve:ts": "tsx node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --incremental",
     "bench": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
     "prebuild": "bin/generate-public-txt.js",
     "build": "npm run build:ts",
@@ -48,6 +49,7 @@
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.5",
     "cssremedy": "^0.1.0-beta.2",
+    "daisyui": "^4.12.14",
     "del-cli": "^5.1.0",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",

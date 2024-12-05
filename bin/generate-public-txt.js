@@ -22,13 +22,12 @@ export function generateRobotsTxt() {
   // Create a non-crawlable robots.txt in non-production environments
   const crawlText = process.env.VERCEL_ENV === 'production' ? crawlableRobotsTxt : uncrawlableRobotsTxt;
 
-  const robotsTxt = `
-# www.robotstxt.org 
+  const robotsTxt = `# www.robotstxt.org 
 
 ${crawlText}
 
 Sitemap: ${META.url}/sitemap.xml
-  `;
+`;
 
   // Generate robots.txt file
   fs.writeFileSync('public/robots.txt', robotsTxt);
@@ -37,8 +36,7 @@ Sitemap: ${META.url}/sitemap.xml
 }
 
 export function generateBuildTxt() {
-  const buildTxt = `
-LAST BUILD: ${filters.dateToISO(BUILD.timestamp)} 
+  const buildTxt = `LAST BUILD: ${filters.dateToISO(BUILD.timestamp)} 
 ENV: ${BUILD.env}
 `;
 

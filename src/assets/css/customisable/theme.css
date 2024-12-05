@@ -1,0 +1,207 @@
+/**
+ * THEME
+ * 
+ * BREAKPOINTS: 1. mob-lg | 2. tab-sm | 3. tab-lg  | 4. desk-md 
+ * 
+ */
+
+@layer base {
+  /** 
+   * SCROLLBAR & CURSOR
+   */
+
+  ::-webkit-scrollbar {
+    width: 1em;
+    height: 2em;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #14a5b8;
+  }
+
+  ::-webkit-scrollbar-button {
+    background: #ccc;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background: #eee;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  /** 
+   * LAYOUT SETTINGS
+   */
+
+  .layout__c {
+    @apply relative z-0 min-h-screen;
+  }
+
+  .section-spacing {
+    @apply mt-16;
+  }
+
+  /** 
+   * TYPOGRAPHY
+   */
+
+  .heading {
+    @apply font-heading;
+  }
+  .heading--xl {
+    @apply desk-lg:text-5xl-minus text-4xl; /*  */
+    @apply font-semibold;
+    @apply tracking-normal;
+  }
+  .heading--lg {
+    @apply tab-sm:text-3xl desk-lg:text-4xl text-2xl; /*  */
+    @apply font-semibold;
+    @apply tracking-1;
+  }
+  .heading--md {
+    @apply tab-sm:text-xl desk-lg:text-2xl text-lg;
+    @apply tracking-2;
+  }
+  .heading--sm {
+    @apply desk-sm:text-sm text-base;
+    @apply tracking-2;
+  }
+  .heading--xs {
+    @apply text-sm;
+    @apply tracking-2;
+  }
+  .heading--2xs {
+    @apply text-3xs tab-sm:text-2xs desk-md:text-sm;
+    @apply lowercase;
+    @apply tracking-3;
+  }
+
+  .subheading {
+    @apply font-subheading;
+  }
+  .subheading--lg {
+    @apply text-2xl;
+  }
+  .subheading--md {
+    @apply text-lg;
+  }
+  .subheading--sm {
+    @apply text-base;
+    @apply tracking-1;
+  }
+
+  .body {
+    @apply font-body;
+  }
+  .body--xl {
+    @apply text-2xl;
+    @apply font-semibold;
+    @apply tracking-1;
+  }
+  .body--lg {
+    @apply text-xl;
+    @apply tracking-2;
+  }
+  .body--md {
+    @apply text-base;
+    @apply tracking-1;
+  }
+  .body--sm {
+    @apply text-sm;
+    @apply tracking-3;
+  }
+
+  .btn-text {
+    @apply font-btn;
+  }
+  .btn-text--lg {
+    @apply tab-sm:text-xl text-base;
+    @apply tracking-2;
+    @apply uppercase;
+  }
+  .btn-text--md {
+    @apply text-sm;
+  }
+  .btn-text--sm {
+    @apply text-xs-plus tab-sm:text-sm;
+    @apply tracking-2;
+    @apply uppercase;
+  }
+
+  .highlight-text {
+    @apply font-highlight;
+  }
+
+  /** 
+   * BUTTON VARIANTS
+   */
+
+  .btn {
+    /* @apply action inline-flex cursor-pointer items-center rounded-full  shadow outline-none; */
+  }
+
+  .btn--standard {
+    @apply text-white-primary bg-primary;
+    transition:
+      background-color 0.5s ease-in-out,
+      color 0.4s ease-in-out;
+    &:hover {
+      @apply bg-tertiary;
+    }
+  }
+
+  .btn--outline {
+    @apply font-light;
+    @apply border-white-primary/70 text-white-primary border bg-transparent;
+
+    transition: opacity ease-in-out 0.4s;
+    &:hover {
+      @apply opacity-80;
+    }
+  }
+
+  .btn--primary {
+    @apply text-white-primary bg-primary;
+
+    transition:
+      background-color 0.5s ease-in-out,
+      color 0.4s ease-in-out;
+    &:hover {
+    }
+  }
+
+  .btn--secondary {
+    @apply text-white-primary bg-secondary;
+
+    transition:
+      background-color 0.5s ease-in-out,
+      color 0.4s ease-in-out;
+    &:hover {
+    }
+  }
+
+  /** 
+   * BUTTON SIZE 
+   */
+
+  .btn--lg {
+    @apply btn-text btn-text--lg;
+    @apply h-8 px-6 py-0.5 pt-px;
+    @media screen(tab-sm) {
+      @apply h-10 px-8;
+    }
+  }
+
+  .btn--md {
+    @apply btn-text btn-text--md;
+    @apply h-6 px-6 py-0.5 pt-1;
+  }
+
+  .btn--sm {
+    @apply btn-text btn-text--sm;
+    @apply h-5 px-6 py-0.5 pt-1;
+  }
+}

@@ -1,0 +1,94 @@
+
+🌼   daisyUI 4.12.14
+├─ ✔︎ 3 themes added    https://daisyui.com/docs/themes
+╰─ ★ Star daisyUI on GitHub https://github.com/saadeghi/daisyui
+
+@layer base {
+  :root {
+    /** 
+     * TYPOGRAPHY 
+     */
+
+    --font-serif: 'Georgia', 'Baskerville', 'Palatino', 'Times New Roman', serif;
+    --font-sans-serif: 'Garamond', 'Gill Sans', 'Tahoma', 'Helvetica', 'Verdana', 'Arial', sans-serif;
+    --font-mono: 'Andalé Mono', 'Lucida', 'Monaco', 'Consolas', 'Courier', monospace;
+    --font-cursive: 'Bradley Hand', 'Brush Script MT', 'Comic Sans MS', cursive;
+    --font-fantasy: 'Luminari', fantasy;
+
+    --font-space-mono: 'Space Mono';
+    --font-lora: 'Lora';
+
+    --font-family-heading: var(--font-space-mono), var(--font-mono);
+    --font-family-subheading: var(--font-lora), var(--font-serif);
+    --font-family-body: var(--font-lora), var(--font-mono);
+    --font-family-btn: var(--font-space-mono), var(--font-sans-serif);
+    --font-family-highlight: var(--font-felix), var(--font-serif);
+
+    /** 
+     * COLOR 
+     * 
+     * - RGB format
+     */
+
+    /* BASE */
+
+    --color-red: 255 0 0;
+    --color-green: 0 255 0;
+    --color-blue: 0 0 255;
+    --color-white: 255 255 255;
+    --color-black: 0 0 0;
+    --color-gray: 197 197 197;
+    --color-gray-light: 241 241 241;
+    --color-gray-dark: 159 159 159;
+    --color-gray-darker: 106 106 106;
+
+    /* PALETTE */
+
+    --color-snow: 209 239 255;
+    --color-blue-dark: 20 34 45;
+    --color-blue-light: 38 61 80;
+    --color-blue-highlight: 39 84 122;
+    --color-blue-sky: 0 143 255;
+
+    /* PRIMARY */
+
+    --color-white-primary: 255 255 255;
+    --color-black-primary: 12 20 26;
+    --color-blue-primary: 0 60 86;
+    --color-red-primary: 255 50 50;
+
+    --color-primary: 182 37 37;
+    --color-secondary: 59 14 0;
+    --color-tertiary: var(--color-hermes-orange);
+
+    /** 
+     * LAYOUT 
+     */
+
+    --max-width: 1440px;
+
+    --gutter-outer-x: 24px;
+    --gutter-outer-y: 40px;
+    --navigation-height: 64px;
+    --announcement-height: 0px;
+
+    /**
+     * --gutter-section: 16px;
+     */
+
+    @media screen(tab-sm) {
+      --gutter-outer-x: 36px;
+      --navigation-height: 64px;
+    }
+    @media screen(desk-sm) {
+      --gutter-outer-x: 64px;
+      --gutter-outer-y: 64px;
+      --navigation-height: 80px;
+    }
+    @media screen(desk-lg) {
+      --gutter-outer-x: 80px;
+      --gutter-outer-y: 80px;
+      --navigation-height: 84px;
+    }
+  }
+}

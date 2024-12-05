@@ -52,6 +52,7 @@ export default function (eleventyConfig) {
 				e => done(e, null),
 			);
 	});
+	// Development: Watch .CSS files
 	eleventyConfig.addWatchTarget('src/assets/css/**/*.css');
 
 	// Plugins

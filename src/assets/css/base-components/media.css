@@ -1,0 +1,17 @@
+/** 
+ * MEDIA
+ */
+
+@layer components {
+  .image__c {
+    @apply relative h-full w-full;
+    &.square {
+      .image__placeholder {
+        @apply pt-full h-0 w-full;
+      }
+      .image__image {
+        @apply abs-fill;
+      }
+    }
+  }
+}

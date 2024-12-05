@@ -1,0 +1,22 @@
+/* lightbox */
+/* @import 'yet-another-react-lightbox/styles.css'; */
+/* @import 'yet-another-react-lightbox/dist/styles.css';
+@import 'yet-another-react-lightbox/dist/plugins/captions/captions.css';
+@import 'yet-another-react-lightbox/dist/plugins/thumbnails/thumbnails.css'; */
+
+/* Tailwind */
+@import 'assets/css/tailwind.css';
+
+/* INCLUDE / STATIC FILES */
+
+@import 'assets/css/_includes/fonts';
+@import 'assets/css/_includes/initial';
+@import 'assets/css/_includes/utilities';
+@import 'assets/css/_includes/base-components';
+
+/* CUSTOMISABLE */
+
+@import 'assets/css/customisable/variables';
+@import 'assets/css/customisable/theme';
+@import 'assets/css/customisable/components';
+@import 'assets/css/customisable/customisation';

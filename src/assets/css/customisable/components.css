@@ -1,0 +1,57 @@
+/* @import './theme'; */
+
+/**
+ * COMPONENTS
+ * 
+ * BLOCKS, LAYOUT
+ * 
+ */
+
+@layer components {
+  /** 
+   * SECTIONS / BLOCKS 
+   */
+
+  /** 
+   * PLUGIN / UTIL
+   */
+
+  .style-guide {
+    .style-guide__font-sizes {
+      font-family: Monospace;
+      table {
+        @apply py-2;
+      }
+      th {
+        @apply min-w-[140px] py-4 text-center;
+        @apply text-white-primary border-x-0 border-b border-t-0 border-solid border-black bg-primary;
+        &:first-child {
+          @apply text-black-primary bg-transparent;
+        }
+      }
+      td {
+        @apply py-2;
+        @apply bg-white text-center;
+        &:first-child {
+          @apply text-white-primary sticky left-0 bg-secondary;
+        }
+      }
+    }
+    .style-guide__color-palette {
+      font-family: Monospace;
+      font-size: 16px;
+      text-transform: uppercase;
+      @apply flex items-center gap-4;
+      .style-guide__color-palette-color {
+        input {
+          @apply h-72 w-14;
+          @apply shadow-xl;
+          border-color: transparent;
+        }
+        label {
+          @apply mt-2;
+        }
+      }
+    }
+  }
+}
