@@ -20,8 +20,7 @@ export default {
   quoteProps: 'as-needed',
   plugins: [
     'prettier-plugin-tailwindcss',
-    // 'prettier-plugin-twig-nunjucks-melody',
-    // 'prettier-plugin-jinja-template',
+    'prettier-plugin-jinja-template',
     // '@trivago/prettier-plugin-sort-imports'
   ],
   // importOrderSeparation: true,
@@ -44,8 +43,7 @@ export default {
     {
       files: ['*.njk'],
       options: {
-        // parser: 'jinja-template',
-        // parser: 'twig-nunjucks-melody',
+        parser: 'jinja-template',
       },
     },
   ],
