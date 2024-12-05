@@ -1,2 +1,3 @@
-LAST BUILD: {{ build.timestamp | dateToISO }} 
-ENV: {{ build.env }}
+
+LAST BUILD: 2024-12-05T03:38:36.935 
+ENV: undefined

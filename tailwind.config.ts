@@ -4,8 +4,11 @@ import * as fs from 'fs';
 import plugin from 'tailwindcss/plugin';
 import { BREAKPOINTS } from './src/_data/BREAKPOINTS';
 import './utils/prototype';
+import { getPathnames } from './utils/pathname';
 
 // =========================================================================
+
+const __dirname = getPathnames(import.meta.url).__dirname;
 
 /* Converts HEX color to RGB */
 function toRGB(hex) {
