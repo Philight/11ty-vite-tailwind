@@ -3,6 +3,16 @@
   "version": "1.2.0",
   "type": "module",
   "description": "A clean and simple Eleventy 2 Starter Kit with Vite",
+  "repository": {
+    "type": "git",
+    "url": "git+https://matthiasott@github.com/matthiasott/11ty22.git"
+  },
+  "author": "Matthias Ott",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matthiasott/11ty22/issues"
+  },
+  "homepage": "https://github.com/matthiasott/11ty22#readme",
   "browserslist": [
     "> 0.5%",
     "not IE 11"
@@ -29,18 +39,8 @@
     "clean": "del-cli _site",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://matthiasott@github.com/matthiasott/11ty22.git"
-  },
-  "author": "Matthias Ott",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/matthiasott/11ty22/issues"
-  },
-  "homepage": "https://github.com/matthiasott/11ty22#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0-beta.1",
+    "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-img": "^4.0.2",
     "@11ty/eleventy-navigation": "^0.3.5",
     "@11ty/eleventy-plugin-rss": "^2.0.2",
@@ -51,6 +51,7 @@
     "cssremedy": "^0.1.0-beta.2",
     "daisyui": "^4.12.14",
     "del-cli": "^5.1.0",
+    "eleventy-plugin-svg-sprite": "^2.4.2",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",

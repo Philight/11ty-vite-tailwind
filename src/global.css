@@ -9,14 +9,14 @@
 
 /* INCLUDE / STATIC FILES */
 
-@import 'assets/css/_includes/fonts';
-@import 'assets/css/_includes/initial';
-@import 'assets/css/_includes/utilities';
-@import 'assets/css/_includes/base-components';
+@import 'assets/css/_includes/fonts.css';
+@import 'assets/css/_includes/initial.css';
+@import 'assets/css/_includes/utilities.css';
+@import 'assets/css/_includes/base-components.css';
 
 /* CUSTOMISABLE */
 
-@import 'assets/css/customisable/variables';
-@import 'assets/css/customisable/theme';
-@import 'assets/css/customisable/components';
-@import 'assets/css/customisable/customisation';
+@import 'assets/css/customisable/variables.css';
+@import 'assets/css/customisable/theme.css';
+@import 'assets/css/customisable/components.css';
+@import 'assets/css/customisable/customisation.css';

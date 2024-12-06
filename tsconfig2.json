@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "target": "ESNext",
+    "jsx": "react-jsx",
+    "jsxImportSource": "jsx-async-runtime",
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["src", "utils"],
+  "exclude": ["node_modules", "_site"]
+}

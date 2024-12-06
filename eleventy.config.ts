@@ -1,11 +1,14 @@
-import { isValidElement } from 'react';
-// import { renderToStaticMarkup, renderToString } from 'react-dom/server';
-import { jsxToString } from 'jsx-async-runtime';
-
+import { EleventyRenderPlugin } from '@11ty/eleventy';
+import type { UserConfig } from '@11ty/eleventy';
 import EleventyPluginNavigation from '@11ty/eleventy-navigation';
 import EleventyPluginRss from '@11ty/eleventy-plugin-rss';
 import EleventyPluginSyntaxhighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 import EleventyVitePlugin from '@11ty/eleventy-plugin-vite';
+import svgSprite from 'eleventy-plugin-svg-sprite';
+
+import { isValidElement } from 'react';
+// import { renderToStaticMarkup, renderToString } from 'react-dom/server';
+import { jsxToString } from 'jsx-async-runtime';
 
 import rollupPluginCritical from 'rollup-plugin-critical';
 
@@ -24,7 +27,11 @@ import shortcodes from './utils/shortcodes.js';
 
 // ==================================================================
 
-export default function (eleventyConfig) {
+const SVG_DIR = 'public/assets/icons';
+
+// ==================================================================
+
+export default function (eleventyConfig: UserConfig) {
 	eleventyConfig.setServerPassthroughCopyBehavior('copy');
 	eleventyConfig.addPassthroughCopy('public');
 
@@ -56,9 +63,28 @@ export default function (eleventyConfig) {
 	eleventyConfig.addWatchTarget('src/assets/css/**/*.css');
 
 	// Plugins
+	eleventyConfig.addPlugin(EleventyRenderPlugin);
 	eleventyConfig.addPlugin(EleventyPluginNavigation);
 	eleventyConfig.addPlugin(EleventyPluginRss);
 	eleventyConfig.addPlugin(EleventyPluginSyntaxhighlight);
+	// SVG Sprite
+	eleventyConfig.addPlugin(svgSprite, [
+		{
+			path: `./${SVG_DIR}`,
+			svgSpriteShortcode: 'svgsprite', // default
+			svgShortcode: 'spriteIcon', // optional to have custom svgShortcode per instance. The default "svg" shortcode would work for all instances.
+			globalClasses: 'svgicon',
+			defaultClasses: 'default-class',
+		},
+		// {
+		// 	path: './assets/svg_home',
+		// 	svgSpriteShortcode: 'svgspriteHome',
+		// 	svgShortcode: 'svgHome', // optional to have custom svgShortcode per instance. The default "svg" shortcode would work for all instances.
+		// 	globalClasses: 'svgicon',
+		// 	defaultClasses: 'default-class',
+		// },
+	]);
+	// Vite.config.js
 	eleventyConfig.addPlugin(EleventyVitePlugin, {
 		tempFolderName: '.11ty-vite', // Default name of the temp folder
 
@@ -135,6 +161,38 @@ export default function (eleventyConfig) {
 	});
 
 	eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`);
+
+	// SVG Sprite Plugin, extend shortcode, #svg- is the prefix created by svg-sprite
+	eleventyConfig.addShortcode('svgicon', function (name) {
+		return `<svg><use xlink:href="#svg-${name}"></use></svg>`;
+	});
+
+	// // Custom SVG loader shortcode
+	// eleventyConfig.addNunjucksAsyncShortcode('icon', async function (name, kwargs = {}) {
+	// 	const { __keywords, ...attrs } = kwargs ?? {};
+
+	// 	this.page.icons ||= new Set();
+	// 	this.page.icons.add(name);
+	// 	const attributes = Object.entries(attrs)
+	// 		.map(([key, value]) => `${key}="${value}"`)
+	// 		.join(' ');
+	// 	console.log('this.page.icons', this.page.icons);
+	// 	console.log('this.ctx.collections.icons', this.ctx.collections.icons);
+	// 	return `<svg ${attributes}><use href="/assets/icons/#${name}"></use></svg>`;
+	// });
+
+	// // Custom SVG loader shortcode
+	// eleventyConfig.addAsyncShortcode('svg', async function (filename, svgOptions = {}) {
+	// 	const { isNjk = false, filePathOption, engineOption } = svgOptions;
+	// 	// console.log('eleventyConfig', eleventyConfig);
+	// 	// console.log('this.ctx', this.ctx);
+	// 	console.log('this.page', this.page);
+	// 	// console.log('this.eleventy', this.eleventy);
+	// 	const filePath = filePathOption ?? `${SVG_DIR}/${filename}.svg${isNjk ? '.njk' : ''}`;
+	// 	const engine = engineOption ?? (isNjk ? 'njk' : 'html'); // HTML engine for vanilla SVG if none is provided
+	// 	const content = eleventyConfig.javascript.functions.renderFile(filePath, svgOptions, engine);
+	// 	return content;
+	// });
 
 	// Customize Markdown library and settings:
 	let markdownLibrary = markdownIt({
