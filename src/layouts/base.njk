@@ -7,7 +7,7 @@
 
 		<link rel="preload" href="/assets/fonts/dm-sans/dm-sans-v11-latin-regular-subset.woff2" as="font" type="font/woff2" crossorigin="" />
 
-		{% include "meta.njk" %}
+		{% include "layout/meta.njk" %}
 
 		<script>
 			/* Font loading: Critical FOFT with preload, see: https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-with-preload */
@@ -50,9 +50,9 @@
 		<a href="#main" class="skiplink">Skip to main content</a>
 
 		<div class="layout" role="document">
-			{% include "header.njk" %}
+			{% include "layout/header.njk" %}
 			<main id="main" class="main">{{ content | safe }}</main>
-			{% include "footer.njk" %}
+			{% include "layout/footer.njk" %}
 		</div>
 
 		<script type="module" src="{{ '/assets/js/main.js' | url }}"></script>
