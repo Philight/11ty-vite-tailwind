@@ -32,21 +32,22 @@ const SVG_DIR = 'public/assets/icons';
 // ==================================================================
 
 export default function (eleventyConfig: UserConfig) {
-	/***
-	 * Development: Watch .CSS files
-	 */
-
-	eleventyConfig.addWatchTarget('src/assets/css/**/*.css');
-
 	/****
 	 * Development: Copy/pass-through files
 	 */
 
 	eleventyConfig.setServerPassthroughCopyBehavior('copy');
 	eleventyConfig.addPassthroughCopy('public');
-	eleventyConfig.addPassthroughCopy({ 'src/global.css': 'global.css' });
+	// eleventyConfig.addPassthroughCopy({ 'src/global.css': 'global.css' });
 	eleventyConfig.addPassthroughCopy({ 'src/assets/css': 'assets/css' });
 	eleventyConfig.addPassthroughCopy({ 'src/assets/js': 'assets/js' });
+
+	/***
+	 * Development: Watch .CSS files (Hot Reload)
+	 */
+
+	eleventyConfig.addWatchTarget('src/assets/css/**/*.css');
+	eleventyConfig.addWatchTarget('src/content/global.css');
 
 	/***
 	 * Plugins
@@ -139,6 +140,20 @@ export default function (eleventyConfig: UserConfig) {
 		},
 	});
 
+	/***
+	 * Development: Tailwind & CSS, generate 'output.css'
+	 */
+
+	eleventyConfig.addNunjucksAsyncFilter('postcss', (cssCode, done) => {
+		postcss([tailwindcss(twconfig), autoprefixer()])
+			// Without `from` option PostCSS could generate wrong source map and will not find Browserslist config. Set it to CSS file path or to `undefined` to prevent this warning.
+			.process(cssCode, { from: undefined })
+			.then(
+				r => done(null, r.css),
+				e => done(e, null),
+			);
+	});
+
 	/****
 	 * Typescript & TSX
 	 */
@@ -155,19 +170,6 @@ export default function (eleventyConfig: UserConfig) {
 			return `<!doctype html>\n${result}`;
 		}
 		return content;
-	});
-
-	/***
-	 * Tailwind & CSS
-	 */
-
-	eleventyConfig.addNunjucksAsyncFilter('postcss', (cssCode, done) => {
-		postcss([tailwindcss(twconfig), autoprefixer()])
-			.process(cssCode)
-			.then(
-				r => done(null, r.css),
-				e => done(e, null),
-			);
 	});
 
 	/***

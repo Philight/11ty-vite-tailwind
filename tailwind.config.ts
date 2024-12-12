@@ -11,17 +11,7 @@ import { getPathnames } from './utils/pathname';
 // =========================================================================
 
 const __dirname = getPathnames(import.meta.url).__dirname;
-const CSSVariablesPath = __dirname + '/src/assets/css/customisable/variables.css';
-
-/* Converts HEX color to RGB */
-function toRGB(hex) {
-  const bigint = parseInt(hex, 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;
-
-  return [r, g, b].join(' ');
-}
+const CSSVariablesPath = __dirname + '/src/assets/css/configurable/variables.css';
 
 const CSSVariables = fs.readFileSync(CSSVariablesPath, { encoding: 'utf8', flag: 'r' });
 const CSSRules = CSSVariables.split(/\r?\n/);
@@ -40,6 +30,8 @@ const PROPERTY_FORMAT = {
 
 const PROPERTY_SETTINGS = {};
 
+// =========================================================================
+
 function readCSS() {
   for (const property of Object.keys(PROPERTY_MODIFIERS)) {
     const modifier = PROPERTY_MODIFIERS[property];
@@ -55,6 +47,16 @@ function readCSS() {
   }
 
   // console.log(PROPERTY_SETTINGS);
+}
+
+/* Converts HEX color to RGB */
+function toRGB(hex) {
+  const bigint = parseInt(hex, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+
+  return [r, g, b].join(' ');
 }
 
 readCSS();

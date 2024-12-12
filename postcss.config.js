@@ -11,6 +11,7 @@ export default {
       }
 */
     // },
+    'postcss-import': {},
     'postcss-nesting': {},
     autoprefixer: {},
     cssnano: {

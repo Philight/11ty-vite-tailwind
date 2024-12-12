@@ -3,6 +3,8 @@
 /**
  * COMPONENTS
  * 
+ * HOC, complex components..
+ * 
  * BLOCKS, LAYOUT
  * 
  */
@@ -10,6 +12,10 @@
 @layer components {
   /** 
    * SECTIONS / BLOCKS 
+   */
+  
+  /** 
+   * PAGES 
    */
 
   /** 
@@ -24,16 +30,16 @@
       }
       th {
         @apply min-w-[140px] py-4 text-center;
-        @apply text-white-primary border-x-0 border-b border-t-0 border-solid border-black bg-primary;
+        @apply border-x-0 border-b border-t-0 border-solid border-black bg-primary text-white-primary;
         &:first-child {
-          @apply text-black-primary bg-transparent;
+          @apply bg-transparent text-black-primary;
         }
       }
       td {
         @apply py-2;
         @apply bg-white text-center;
         &:first-child {
-          @apply text-white-primary sticky left-0 bg-secondary;
+          @apply sticky left-0 bg-secondary text-white-primary;
         }
       }
     }
