@@ -20,3 +20,8 @@
 @import 'assets/css/customisable/theme.css';
 @import 'assets/css/customisable/components.css';
 @import 'assets/css/customisable/customisation.css';
+
+.svgicon.custom-class-1,
+#svg-logo_icon {
+	width: 300px;
+}

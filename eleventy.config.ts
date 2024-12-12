@@ -39,13 +39,14 @@ export default function (eleventyConfig: UserConfig) {
 	eleventyConfig.addWatchTarget('src/assets/css/**/*.css');
 
 	/****
-	 * BUILD: Copy/pass-through files
+	 * Development: Copy/pass-through files
 	 */
 
 	eleventyConfig.setServerPassthroughCopyBehavior('copy');
-	eleventyConfig.addPassthroughCopy('src/assets/css');
-	eleventyConfig.addPassthroughCopy('src/assets/js');
 	eleventyConfig.addPassthroughCopy('public');
+	eleventyConfig.addPassthroughCopy({ 'src/global.css': 'global.css' });
+	eleventyConfig.addPassthroughCopy({ 'src/assets/css': 'assets/css' });
+	eleventyConfig.addPassthroughCopy({ 'src/assets/js': 'assets/js' });
 
 	/***
 	 * Plugins
