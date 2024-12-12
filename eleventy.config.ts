@@ -6,11 +6,11 @@ import EleventyPluginSyntaxhighlight from '@11ty/eleventy-plugin-syntaxhighlight
 import EleventyVitePlugin from '@11ty/eleventy-plugin-vite';
 import svgSprite from 'eleventy-plugin-svg-sprite';
 
+import rollupPluginCritical from 'rollup-plugin-critical';
+
 import { isValidElement } from 'react';
 // import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { jsxToString } from 'jsx-async-runtime';
-
-import rollupPluginCritical from 'rollup-plugin-critical';
 
 import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
@@ -32,41 +32,30 @@ const SVG_DIR = 'public/assets/icons';
 // ==================================================================
 
 export default function (eleventyConfig: UserConfig) {
-	eleventyConfig.setServerPassthroughCopyBehavior('copy');
-	eleventyConfig.addPassthroughCopy('public');
+	/***
+	 * Development: Watch .CSS files
+	 */
 
-	// Typescript & TSX
-	eleventyConfig.addExtension(['11ty.jsx', '11ty.ts', '11ty.tsx'], {
-		key: '11ty.js',
-	});
-	// eleventyConfig.addTemplateFormats("11ty.ts,11ty.tsx")
-
-	eleventyConfig.addTransform('tsx', async (content: any) => {
-		if (isValidElement(content)) {
-			// const result = await renderToString(content);
-			const result = await jsxToString(content);
-			return `<!doctype html>\n${result}`;
-		}
-		return content;
-	});
-
-	// Tailwind & CSS
-	eleventyConfig.addNunjucksAsyncFilter('postcss', (cssCode, done) => {
-		postcss([tailwindcss(twconfig), autoprefixer()])
-			.process(cssCode)
-			.then(
-				r => done(null, r.css),
-				e => done(e, null),
-			);
-	});
-	// Development: Watch .CSS files
 	eleventyConfig.addWatchTarget('src/assets/css/**/*.css');
 
-	// Plugins
+	/****
+	 * BUILD: Copy/pass-through files
+	 */
+
+	eleventyConfig.setServerPassthroughCopyBehavior('copy');
+	eleventyConfig.addPassthroughCopy('src/assets/css');
+	eleventyConfig.addPassthroughCopy('src/assets/js');
+	eleventyConfig.addPassthroughCopy('public');
+
+	/***
+	 * Plugins
+	 */
+
 	eleventyConfig.addPlugin(EleventyRenderPlugin);
 	eleventyConfig.addPlugin(EleventyPluginNavigation);
 	eleventyConfig.addPlugin(EleventyPluginRss);
 	eleventyConfig.addPlugin(EleventyPluginSyntaxhighlight);
+
 	// SVG Sprite
 	eleventyConfig.addPlugin(svgSprite, [
 		{
@@ -84,7 +73,11 @@ export default function (eleventyConfig: UserConfig) {
 		// 	defaultClasses: 'default-class',
 		// },
 	]);
-	// Vite.config.js
+
+	/***
+	 * BUILD: Vite (Vite.config.js)
+	 */
+
 	eleventyConfig.addPlugin(EleventyVitePlugin, {
 		tempFolderName: '.11ty-vite', // Default name of the temp folder
 
@@ -145,17 +138,76 @@ export default function (eleventyConfig: UserConfig) {
 		},
 	});
 
-	// Filters
+	/****
+	 * Typescript & TSX
+	 */
+
+	eleventyConfig.addExtension(['11ty.jsx', '11ty.ts', '11ty.tsx'], {
+		key: '11ty.js',
+	});
+	// eleventyConfig.addTemplateFormats("11ty.ts,11ty.tsx")
+
+	eleventyConfig.addTransform('tsx', async (content: any) => {
+		if (isValidElement(content)) {
+			// const result = await renderToString(content);
+			const result = await jsxToString(content);
+			return `<!doctype html>\n${result}`;
+		}
+		return content;
+	});
+
+	/***
+	 * Tailwind & CSS
+	 */
+
+	eleventyConfig.addNunjucksAsyncFilter('postcss', (cssCode, done) => {
+		postcss([tailwindcss(twconfig), autoprefixer()])
+			.process(cssCode)
+			.then(
+				r => done(null, r.css),
+				e => done(e, null),
+			);
+	});
+
+	/***
+	 * Customize Markdown library and settings:
+	 */
+
+	let markdownLibrary = markdownIt({
+		html: true,
+		breaks: true,
+		linkify: true,
+	}).use(markdownItAnchor, {
+		permalink: markdownItAnchor.permalink.ariaHidden({
+			placement: 'after',
+			class: 'direct-link',
+			symbol: '#',
+			level: [1, 2, 3, 4],
+		}),
+		slugify: eleventyConfig.getFilter('slug'),
+	});
+	eleventyConfig.setLibrary('md', markdownLibrary);
+
+	/***
+	 * Filters
+	 */
+
 	Object.keys(filters).forEach(filterName => {
 		eleventyConfig.addFilter(filterName, filters[filterName]);
 	});
 
-	// Transforms
+	/***
+	 * Transforms
+	 */
+
 	Object.keys(transforms).forEach(transformName => {
 		eleventyConfig.addTransform(transformName, transforms[transformName]);
 	});
 
-	// Shortcodes
+	/***
+	 * Shortcodes
+	 */
+
 	Object.keys(shortcodes).forEach(shortcodeName => {
 		eleventyConfig.addShortcode(shortcodeName, shortcodes[shortcodeName]);
 	});
@@ -194,41 +246,25 @@ export default function (eleventyConfig: UserConfig) {
 	// 	return content;
 	// });
 
-	// Customize Markdown library and settings:
-	let markdownLibrary = markdownIt({
-		html: true,
-		breaks: true,
-		linkify: true,
-	}).use(markdownItAnchor, {
-		permalink: markdownItAnchor.permalink.ariaHidden({
-			placement: 'after',
-			class: 'direct-link',
-			symbol: '#',
-			level: [1, 2, 3, 4],
-		}),
-		slugify: eleventyConfig.getFilter('slug'),
-	});
-	eleventyConfig.setLibrary('md', markdownLibrary);
+	/*****
+	 * Layouts
+	 */
 
-	// Layouts
 	eleventyConfig.addLayoutAlias('base', 'base.njk');
 	eleventyConfig.addLayoutAlias('post', 'post.njk');
-
-	// Copy/pass-through files
-	eleventyConfig.addPassthroughCopy('src/assets/css');
-	eleventyConfig.addPassthroughCopy('src/assets/js');
 
 	return {
 		templateFormats: ['md', 'njk', 'html', 'liquid'],
 		htmlTemplateEngine: 'njk',
 		passthroughFileCopy: true,
 		dir: {
-			input: 'src',
+			// input: 'src',
+			input: 'src/content',
+			includes: '../_includes',
+			layouts: '../layouts',
+			data: '../_data',
 			// better not use "public" as the name of the output folder (see above...)
 			output: '_site',
-			includes: '_includes',
-			layouts: 'layouts',
-			data: '_data',
 		},
 	};
 }
