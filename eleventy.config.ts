@@ -93,6 +93,25 @@ export default function (eleventyConfig: UserConfig) {
 			},
 			appType: 'custom',
 			assetsInclude: ['**/*.xml', '**/*.txt'],
+			// PostCSS
+			css: {
+				transformer: 'postcss', // 'postcss' | 'lightningcss'
+				// postcss: './postcss.config.js',
+				postcss: {
+					plugins: [tailwindcss()],
+				},
+				devSourcemap: true,
+				preprocessorOptions: {
+					css: {
+						// Bundles CSS separately and includes it in the markup via <link> tags, reducing runtime overhead but increasing network requests.
+						// extract: true,
+						// Dynamically injects CSS into the <head> of the document during build time using <style> tags, reducing network requests but increasing runtime processing.
+						inject: true,
+						// Dynamically loads CSS when its corresponding component is rendered, optimizing performance by reducing server and browser overhead.
+						// codeSplit: true,
+					},
+				},
+			},
 			build: {
 				mode: 'production',
 				sourcemap: 'true',

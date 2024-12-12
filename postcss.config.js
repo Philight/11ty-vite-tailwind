@@ -1,18 +1,9 @@
 export default {
   plugins: {
-    // 'postcss-import': {
-    /*
-      root: path.resolve(__dirname, 'src'),
-//      path: ['app/_assets', 'app/_css'],
-      skipDuplicates: true,
-      resolve: (id, basedir, importOptions) => {
-        const [aliasName, filename] = id.split('/');
-        return aliasMapping[aliasName](filename);
-      }
-*/
-    // },
     'postcss-import': {},
     'postcss-nesting': {},
+    // 'tailwindcss/nesting': {},
+    // tailwindcss: {},
     autoprefixer: {},
     cssnano: {
       preset: 'default',
