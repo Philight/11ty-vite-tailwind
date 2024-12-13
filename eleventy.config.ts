@@ -7,6 +7,10 @@ import EleventyVitePlugin from '@11ty/eleventy-plugin-vite';
 import svgSprite from 'eleventy-plugin-svg-sprite';
 
 import rollupPluginCritical from 'rollup-plugin-critical';
+import ViteLegacy from '@vitejs/plugin-legacy';
+import Unfonts from 'unplugin-fonts/vite';
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import ViteTimeReporter from 'vite-plugin-time-reporter';
 
 import { isValidElement } from 'react';
 // import { renderToStaticMarkup, renderToString } from 'react-dom/server';
@@ -16,7 +20,6 @@ import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
 
 import tailwindcss from 'tailwindcss';
-// import plugin from 'tailwindcss/plugin.js';
 import twconfig from './tailwind.config';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
@@ -101,17 +104,75 @@ export default function (eleventyConfig: UserConfig) {
 					plugins: [tailwindcss()],
 				},
 				devSourcemap: true,
-				preprocessorOptions: {
-					css: {
-						// Bundles CSS separately and includes it in the markup via <link> tags, reducing runtime overhead but increasing network requests.
-						// extract: true,
-						// Dynamically injects CSS into the <head> of the document during build time using <style> tags, reducing network requests but increasing runtime processing.
-						inject: true,
-						// Dynamically loads CSS when its corresponding component is rendered, optimizing performance by reducing server and browser overhead.
-						// codeSplit: true,
-					},
-				},
 			},
+			plugins: [
+				// Legacy support -> https://www.npmjs.com/package/@vitejs/plugin-legacy
+				ViteLegacy({
+					targets: ['defaults'],
+				}),
+				// Optimize all assets(images,svg) using Sharp.js and SVGO at build time -> https://www.npmjs.com/package/vite-plugin-image-optimizer
+				ViteImageOptimizer({}),
+				// Time reporting -> https://www.npmjs.com/package/vite-plugin-time-reporter
+				ViteTimeReporter(),
+				// Fonts preload, inject
+				Unfonts({
+					// Google Fonts
+					google: {
+						/**
+						 * enable preconnect link injection
+						 *   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+						 * default: true
+						 */
+						preconnect: true,
+
+						/**
+						 * allow preconnect to be customized
+						 * default: 'https://fonts.gstatic.com'
+						 */
+						preconnectUrl: 'https://fonts.gstatic.com',
+						fontBaseUrl: 'https://fonts.googleapis.com/css2',
+
+						/**
+						 * values: auto, block, swap(default), fallback, optional
+						 * default: 'swap'
+						 */
+						display: 'block',
+
+						/**
+						 * define where the font load tags should be inserted
+						 * default: 'head-prepend'
+						 *   values: 'head' | 'body' | 'head-prepend' | 'body-prepend'
+						 */
+						injectTo: 'head-prepend',
+
+						/**
+						 * Fonts families lists
+						 */
+						families: [
+							{
+								/**
+								 * Family name (required)
+								 */
+								name: 'Roboto',
+
+								/**
+								 * Family styles
+								 */
+								styles: 'ital,wght@0,400;1,200',
+
+								/**
+								 * enable non-blocking renderer
+								 *   <link rel="preload" href="xxx" as="style" onload="this.rel='stylesheet'">
+								 * default: true
+								 */
+								defer: true,
+							},
+						],
+					},
+					// Custom Fonts
+					custom: {},
+				}),
+			],
 			build: {
 				mode: 'production',
 				sourcemap: 'true',

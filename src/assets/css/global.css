@@ -4,6 +4,9 @@
 @import 'yet-another-react-lightbox/dist/plugins/captions/captions.css';
 @import 'yet-another-react-lightbox/dist/plugins/thumbnails/thumbnails.css'; */
 
+/* unplugin-fonts: Required if using custom or fontsource providers */
+/*import 'unfonts.css'*/
+
 /* Tailwind */
 @import 'assets/css/tailwind';
 
