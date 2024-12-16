@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { clsx } from 'clsx';
+import { clsx, type ClassValue } from 'clsx';
 import { twMerge, extendTailwindMerge } from 'tailwind-merge';
 
 export default {
@@ -7,6 +7,15 @@ export default {
   cn: function (...inputs) {
     console.log('!!!! CN', inputs);
     return twMerge(clsx(inputs));
+  },
+
+  // componentVariants: function (params, page) {
+  // componentVariants: function (...inputs: ClassValue[]) {
+  componentVariants: function (...inputs: ClassValue[]) {
+    console.log('!!!! componentVariants', inputs);
+    // console.log('!!!! componentVariants', page);
+    console.log('!!!! componentVariants page', this.page);
+    console.log('!!!! componentVariants elventy', this.eleventy);
   },
 
   dateToFormat: function (date, format) {

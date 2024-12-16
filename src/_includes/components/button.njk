@@ -1,0 +1,17 @@
+{{ page.url }}
+
+<button
+  type="{{ params.type | default("button") }}"
+  class="{{ params.class | cn('button', params.variant, params.size) }}"
+  role="{{ params.role }}"
+  disabled="{{ params.disabled }}"
+>
+  {%- if params.icon -%}
+    <Icon icon="{{ params.icon }}" />
+  {%- endif -%}
+  {%- if params.label -%}
+    <label>{{ params.label }}</label>
+  {%- endif -%}
+
+  {{ body | safe }}
+</button>

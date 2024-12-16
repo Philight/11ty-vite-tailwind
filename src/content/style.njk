@@ -3,4 +3,4 @@ permalink: output.css
 eleventyExcludeFromCollections: true
 ---
 
-{% set css %} {% include "src/assets/css/global.css" %} {% endset %} {{css | postcss | safe}}
+{% set css %}{% include "src/assets/css/global.css" %}{% endset %} {{ css | postcss | safe }}

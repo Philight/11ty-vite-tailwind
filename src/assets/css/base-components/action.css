@@ -79,7 +79,7 @@
       background-color: #277881a1;
     }
     &.standard {
-      @apply border-white-primary bg-white-primary/10 border;
+      @apply border border-white-primary bg-white-primary/10;
       .icon {
         @apply bg-white-primary;
       }

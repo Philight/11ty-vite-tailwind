@@ -1,0 +1,7 @@
+{%- macro component(name, params) -%}
+  {% include "../components/" + name + ".njk" ignore missing %}
+{%- endmacro -%}
+
+{%- macro base(name, params) -%}
+  {% include "../base/" + name + ".njk" ignore missing %}
+{%- endmacro -%}

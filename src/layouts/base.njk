@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="{{ meta.lang }}">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{{ meta.title }}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ meta.title }}</title>
 
-		<link rel="preload" href="/assets/fonts/dm-sans/dm-sans-v11-latin-regular-subset.woff2" as="font" type="font/woff2" crossorigin="" />
+    <link rel="preload" href="/assets/fonts/dm-sans/dm-sans-v11-latin-regular-subset.woff2" as="font" type="font/woff2" crossorigin="" />
 
-		{% include "layout/meta.njk" %}
+    {% include "layout/meta.njk" %}
 
-		<script>
-			/* Font loading: Critical FOFT with preload, see: https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-with-preload */
-			(function () {
-				if ('fonts' in document) {
-					// Optimization for Repeat Views
-					if (sessionStorage.fontsLoadedCriticalFoftPreload) {
-						document.documentElement.className += ' fonts-loaded-2';
-						return;
-					}
+    <script>
+      /* Font loading: Critical FOFT with preload, see: https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-with-preload */
+      (function () {
+        if ('fonts' in document) {
+          // Optimization for Repeat Views
+          if (sessionStorage.fontsLoadedCriticalFoftPreload) {
+            document.documentElement.className += ' fonts-loaded-2';
+            return;
+          }
 
-					document.fonts.load("1em 'DM Sans Subset'").then(function () {
-						document.documentElement.className += ' fonts-loaded-1';
+          document.fonts.load("1em 'DM Sans Subset'").then(function () {
+            document.documentElement.className += ' fonts-loaded-1';
 
-						Promise.all([
-							document.fonts.load("400 1em 'DM Sans'"),
-							document.fonts.load("700 1em 'DM Sans'"),
-							document.fonts.load("italic 1em 'DM Sans'"),
-							document.fonts.load("italic 700 1em 'DM Sans'"),
-						]).then(function () {
-							document.documentElement.className += ' fonts-loaded-2';
+            Promise.all([
+              document.fonts.load("400 1em 'DM Sans'"),
+              document.fonts.load("700 1em 'DM Sans'"),
+              document.fonts.load("italic 1em 'DM Sans'"),
+              document.fonts.load("italic 700 1em 'DM Sans'"),
+            ]).then(function () {
+              document.documentElement.className += ' fonts-loaded-2';
 
-							// Optimization for Repeat Views
-							sessionStorage.fontsLoadedCriticalFoftPreload = true;
-						});
-					});
-				}
-			})();
-		</script>
+              // Optimization for Repeat Views
+              sessionStorage.fontsLoadedCriticalFoftPreload = true;
+            });
+          });
+        }
+      })();
+    </script>
 
-		<!-- SCSS -->
-		<link rel="stylesheet" href="/assets/css/main.scss" />
-		<!-- PostCSS -->
-		<link rel="stylesheet" href="{{ '/output.css' | url }}" />
-	</head>
-	<body>
-		<!-- SVG Sprites -->
-		{% svgsprite %}
-		<!-- END SVG Sprites -->
+    <!-- SCSS -->
+    <link rel="stylesheet" href="/assets/css/main.scss" />
+    <!-- PostCSS -->
+    <link rel="stylesheet" href="{{ '/output.css' | url }}" />
+  </head>
+  <body>
+    <!-- SVG Sprites -->
+    {% svgsprite %}
+    <!-- END SVG Sprites -->
 
-		<a href="#main" class="skiplink">Skip to main content</a>
+    <a href="#main" class="skiplink">Skip to main content</a>
 
-		<div class="layout" role="document">
-			{% include "layout/header.njk" %}
-			<main id="main" class="main">{{ content | safe }}</main>
-			{% include "layout/footer.njk" %}
-		</div>
+    <div class="layout" role="document">
+      {% include "layout/header.njk" %}
+      <main id="main" class="main">{{ content | safe }}</main>
+      {% include "layout/footer.njk" %}
+    </div>
 
-		<script type="module" src="{{ '/assets/js/main.js' | url }}"></script>
-	</body>
+    <script type="module" src="{{ '/assets/js/main.js' | url }}"></script>
+  </body>
 </html>

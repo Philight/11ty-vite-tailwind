@@ -50,7 +50,7 @@
       }
     }
     &.square {
-      @apply pt-full h-0 w-full;
+      @apply h-0 w-full pt-full;
     }
     &.line {
       @apply h-0.5 w-4;
@@ -123,13 +123,13 @@
         linear-gradient(336deg, rgba(var(--color-blue) / 0.8), rgba(var(--color-blue) / 0) 70.71%);
     }
     &.backdrop {
-      @apply bg-black-primary/80 -z-10;
+      @apply -z-10 bg-black-primary/80;
     }
     &.overlay {
-      @apply bg-black-primary/60 z-10;
+      @apply z-10 bg-black-primary/60;
     }
     &.stripe {
-      @apply bg-black-primary top-0 -z-10 h-1/2 translate-y-0;
+      @apply top-0 -z-10 h-1/2 translate-y-0 bg-black-primary;
     }
   }
 }

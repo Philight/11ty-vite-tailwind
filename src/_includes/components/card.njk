@@ -1,0 +1,11 @@
+{% macro card(title, url, media, mediaAlt, body) %}
+  <article class="card">
+    <h2 class="card__title">
+      <a href="{{ url }}">{{ title | safe }}</a>
+    </h2>
+    <div class="card__media">
+      <img src="{{ media }}" alt="{{ mediaAlt }}" />
+    </div>
+    <div class="card__body">{{ body | safe }}</div>
+  </article>
+{% endmacro %}

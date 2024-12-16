@@ -52,21 +52,21 @@
     @apply font-heading;
   }
   .heading--xl {
-    @apply desk-lg:text-5xl-minus text-4xl; /*  */
+    @apply text-4xl desk-lg:text-5xl-minus; /*  */
     @apply font-semibold;
     @apply tracking-normal;
   }
   .heading--lg {
-    @apply tab-sm:text-3xl desk-lg:text-4xl text-2xl; /*  */
+    @apply text-2xl tab-sm:text-3xl desk-lg:text-4xl; /*  */
     @apply font-semibold;
     @apply tracking-1;
   }
   .heading--md {
-    @apply tab-sm:text-xl desk-lg:text-2xl text-lg;
+    @apply text-lg tab-sm:text-xl desk-lg:text-2xl;
     @apply tracking-2;
   }
   .heading--sm {
-    @apply desk-sm:text-sm text-base;
+    @apply text-base desk-sm:text-sm;
     @apply tracking-2;
   }
   .heading--xs {
@@ -118,7 +118,7 @@
     @apply font-btn;
   }
   .btn-text--lg {
-    @apply tab-sm:text-xl text-base;
+    @apply text-base tab-sm:text-xl;
     @apply tracking-2;
     @apply uppercase;
   }
@@ -144,7 +144,7 @@
   }
 
   .btn--standard {
-    @apply text-white-primary bg-primary;
+    @apply bg-primary text-white-primary;
     transition:
       background-color 0.5s ease-in-out,
       color 0.4s ease-in-out;
@@ -155,7 +155,7 @@
 
   .btn--outline {
     @apply font-light;
-    @apply border-white-primary/70 text-white-primary border bg-transparent;
+    @apply border border-white-primary/70 bg-transparent text-white-primary;
 
     transition: opacity ease-in-out 0.4s;
     &:hover {
@@ -164,7 +164,7 @@
   }
 
   .btn--primary {
-    @apply text-white-primary bg-primary;
+    @apply bg-primary text-white-primary;
 
     transition:
       background-color 0.5s ease-in-out,
@@ -174,7 +174,7 @@
   }
 
   .btn--secondary {
-    @apply text-white-primary bg-secondary;
+    @apply bg-secondary text-white-primary;
 
     transition:
       background-color 0.5s ease-in-out,

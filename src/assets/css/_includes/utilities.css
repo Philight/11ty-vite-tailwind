@@ -19,7 +19,7 @@
   }
 
   .page-max-w {
-    @apply gutter-outer-x max-w-default mx-auto;
+    @apply gutter-outer-x mx-auto max-w-default;
   }
 
   /**
@@ -293,7 +293,7 @@
           @apply col-span-10 row-span-4;
         }
         &:nth-child(12n + 4) {
-          @apply row-span-8 col-span-6;
+          @apply col-span-6 row-span-8;
         }
         &:nth-child(12n + 5) {
           @apply col-span-10 row-span-4;
@@ -303,10 +303,10 @@
         }
 
         &:nth-child(12n + 7) {
-          @apply row-span-12 col-span-4;
+          @apply col-span-4 row-span-12;
         }
         &:nth-child(12n + 8) {
-          @apply row-span-8 col-span-8;
+          @apply col-span-8 row-span-8;
         }
         &:nth-child(12n + 9) {
           @apply col-span-12 row-span-4;
@@ -354,7 +354,7 @@
           @apply col-span-7 row-span-3;
         }
         &:nth-child(24n + 7) {
-          @apply row-span-7 col-span-3;
+          @apply col-span-3 row-span-7;
         }
         &:nth-child(24n + 8) {
           @apply col-span-8 row-span-4;
